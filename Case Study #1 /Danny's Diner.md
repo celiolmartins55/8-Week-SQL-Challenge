@@ -1,89 +1,31 @@
+
 **Query #1**
 
-    /* --------------------
-       Case Study Questions
-       --------------------*/
-    
-    -- 1. What is the total amount each customer spent at the restaurant?
-    SELECT
-    	s.customer_id,
-        sum(m.price) as total_amount_spent
-    FROM sales s 
-    LEFT JOIN 
-    menu m ON s.product_id=m.product_id
-    GROUP BY s.customer_id
-    ORDER BY s.customer_id ASC;
-
-| customer_id | total_amount_spent |
-| ----------- | ------------------ |
-| A           | 76                 |
-| B           | 74                 |
-| C           | 36                 |
-
----
-**Query #2**
-
-    -- 2. How many days has each customer visited the restaurant?
-    SELECT
-    	s.customer_id,
-        COUNT(DISTINCT s.order_date) as Days_Visited
-    FROM sales s
-    GROUP BY customer_id;
-
-| customer_id | days_visited |
-| ----------- | ------------ |
-| A           | 4            |
-| B           | 6            |
-| C           | 2            |
-
----
-**Query #3**
-
-    -- 3. What was the first item from the menu purchased by each customer?
-    SELECT DISTINCT
-    	s.customer_id,
-        m.product_name
-    FROM sales s 
-    INNER JOIN 
-    menu m ON s.product_id=m.product_id
-    WHERE s.order_date = (
-      						SELECT MIN(s2.order_date)
-                            FROM sales s2
-                            WHERE s.customer_id=s2.customer_id);
-
-| customer_id | product_name |
-| ----------- | ------------ |
-| A           | curry        |
-| A           | sushi        |
-| B           | curry        |
-| C           | ramen        |
-
----
-**Query #4**
-
-    -- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
-    -- 5. Which item was the most popular for each customer?
-    -- 6. Which item was purchased first by the customer after they became a member?
-    -- 7. Which item was purchased just before the customer became a member?
-    -- 8. What is the total items and amount spent for each member before they became a member?
-    -- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
     -- 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
     
-    -- Example Query:
     SELECT
-      	product_id,
-        product_name,
-        price
-    FROM dannys_diner.menu
-    ORDER BY price DESC
-    LIMIT 5;
+        *,
+        order_date + 365 AS uma_semana
+    FROM sales
 
-| product_id | product_name | price |
-| ---------- | ------------ | ----- |
-| 2          | curry        | 15    |
-| 3          | ramen        | 12    |
-| 1          | sushi        | 10    |
+| customer_id | order_date | product_id | uma_semana |
+| ----------- | ---------- | ---------- | ---------- |
+| A           | 2021-01-01 | 1          | 2022-01-01 |
+| A           | 2021-01-01 | 2          | 2022-01-01 |
+| A           | 2021-01-07 | 2          | 2022-01-07 |
+| A           | 2021-01-10 | 3          | 2022-01-10 |
+| A           | 2021-01-11 | 3          | 2022-01-11 |
+| A           | 2021-01-11 | 3          | 2022-01-11 |
+| B           | 2021-01-01 | 2          | 2022-01-01 |
+| B           | 2021-01-02 | 2          | 2022-01-02 |
+| B           | 2021-01-04 | 1          | 2022-01-04 |
+| B           | 2021-01-11 | 1          | 2022-01-11 |
+| B           | 2021-01-16 | 3          | 2022-01-16 |
+| B           | 2021-02-01 | 3          | 2022-02-01 |
+| C           | 2021-01-01 | 3          | 2022-01-01 |
+| C           | 2021-01-01 | 3          | 2022-01-01 |
+| C           | 2021-01-07 | 3          | 2022-01-07 |
 
 ---
 
-
+[View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
