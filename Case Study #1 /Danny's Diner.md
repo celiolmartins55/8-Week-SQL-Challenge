@@ -1,11 +1,8 @@
-
-**Query #1**
-
     /* --------------------
        Case Study Questions
        --------------------*/
+**What is the total amount each customer spent at the restaurant?**
     
-    -- 1. What is the total amount each customer spent at the restaurant?
     SELECT
     	s.customer_id,
         sum(m.price) as total_amount_spent
@@ -22,9 +19,8 @@
 | C           | 36                 |
 
 ---
-**Query #2**
-
-    -- 2. How many days has each customer visited the restaurant?
+**How many days has each customer visited the restaurant?**
+    
     SELECT
     	s.customer_id,
         COUNT(DISTINCT s.order_date) as Days_Visited
@@ -38,9 +34,8 @@
 | C           | 2            |
 
 ---
-**Query #3**
-
-    -- 3. What was the first item from the menu purchased by each customer?
+**What was the first item from the menu purchased by each customer?**
+    
     SELECT DISTINCT
     	s.customer_id,
         m.product_name
