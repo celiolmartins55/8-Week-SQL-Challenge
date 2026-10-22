@@ -9,7 +9,7 @@
 **1. What is the total amount each customer spent at the restaurant?**
     
     SELECT
-    	s.customer_id,
+        s.customer_id,
         sum(m.price) as total_amount_spent
     FROM sales s 
     LEFT JOIN 
@@ -27,7 +27,7 @@
 **2. How many days has each customer visited the restaurant?**
     
     SELECT
-    	s.customer_id,
+        s.customer_id,
         COUNT(DISTINCT s.order_date) as Days_Visited
     FROM sales s
     GROUP BY customer_id;
@@ -42,15 +42,14 @@
 **3. What was the first item from the menu purchased by each customer?**
     
     SELECT DISTINCT
-    	s.customer_id,
+        s.customer_id,
         m.product_name
     FROM sales s 
     LEFT JOIN
     menu m ON s.product_id=m.product_id
-    WHERE s.order_date = (
-      						SELECT MIN(s2.order_date)
-                            FROM sales s2
-                            WHERE s.customer_id=s2.customer_id);
+    WHERE s.order_date = (SELECT MIN(s2.order_date)
+                        FROM sales s2
+                        WHERE s.customer_id=s2.customer_id);
 
 | customer_id | product_name |
 | ----------- | ------------ |
@@ -63,7 +62,7 @@
 **4. What is the most purchased item on the menu and how many times was it purchased by all customers?**
     
     SELECT
-    	m.product_name,
+        m.product_name,
         COUNT(s.customer_id) as total_purchases
     FROM sales s 
     LEFT JOIN
@@ -94,7 +93,7 @@
     )
     
     SELECT
-    	customer_id,
+        customer_id,
         product_name as most_popular,
         quantity
     FROM RankProdutos
