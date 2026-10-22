@@ -1,7 +1,7 @@
     /* --------------------
        Case Study Questions
        --------------------*/
-**What is the total amount each customer spent at the restaurant?**
+**1 What is the total amount each customer spent at the restaurant?**
     
     SELECT
     	s.customer_id,
@@ -19,7 +19,7 @@
 | C           | 36                 |
 
 ---
-**How many days has each customer visited the restaurant?**
+**2 How many days has each customer visited the restaurant?**
     
     SELECT
     	s.customer_id,
@@ -34,7 +34,7 @@
 | C           | 2            |
 
 ---
-**What was the first item from the menu purchased by each customer?**
+**3 What was the first item from the menu purchased by each customer?**
     
     SELECT DISTINCT
     	s.customer_id,
@@ -55,9 +55,8 @@
 | C           | ramen        |
 
 ---
-**Query #4**
-
-    -- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+**4. What is the most purchased item on the menu and how many times was it purchased by all customers?**
+    
     SELECT
     	m.product_name,
         COUNT(s.customer_id) as total_purchases
@@ -73,9 +72,8 @@
 | ramen        | 8               |
 
 ---
-**Query #5**
+**5. Which item was the most popular for each customer?**
 
-    -- 5. Which item was the most popular for each customer?
     WITH RankProdutos AS (
         SELECT
             s.customer_id,
@@ -106,9 +104,8 @@
 | C           | ramen        | 3        |
 
 ---
-**Query #6**
+**6. Which item was purchased first by the customer after they became a member?**
 
-    -- 6. Which item was purchased first by the customer after they became a member?
     WITH posmember AS(
     	SELECT
       	 	s.customer_id,
@@ -136,9 +133,8 @@
 | sushi        | B           | 2021-01-11 |
 
 ---
-**Query #7**
+**7. Which item was purchased just before the customer became a member?**
 
-    -- 7. Which item was purchased just before the customer became a member?
     WITH premember AS(
     	SELECT
       	 	s.customer_id,
@@ -169,9 +165,8 @@
 | sushi        | B           | 2021-01-04 |
 
 ---
-**Query #8**
+**8. What is the total items and amount spent for each member before they became a member?**
 
-    -- 8. What is the total items and amount spent for each member before they became a member?
     WITH premember AS(
     	SELECT
       	 	s.customer_id,
@@ -202,9 +197,8 @@
 
 ---
 
-**Query #1**
+**9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?**
 
-    -- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
     WITH cte_point AS(
     	SELECT
       		product_id,
@@ -229,9 +223,7 @@
 | C           | 360          |
 
 ---
-**Query #2**
-
-    -- 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+**10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?**
     SELECT
         s.customer_id,
         SUM(
