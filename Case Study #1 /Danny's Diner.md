@@ -1,7 +1,12 @@
-    /* --------------------
-       Case Study Questions
-       --------------------*/
-**1 What is the total amount each customer spent at the restaurant?**
+# 🍽 Case Study #1 - Danny's Diner
+
+<p align="center">
+    <img src="https://8weeksqlchallenge.com/images/case-study-designs/1.png" width="200">
+</p>
+
+
+
+**1. What is the total amount each customer spent at the restaurant?**
     
     SELECT
     	s.customer_id,
@@ -19,7 +24,7 @@
 | C           | 36                 |
 
 ---
-**2 How many days has each customer visited the restaurant?**
+**2. How many days has each customer visited the restaurant?**
     
     SELECT
     	s.customer_id,
@@ -34,7 +39,7 @@
 | C           | 2            |
 
 ---
-**3 What was the first item from the menu purchased by each customer?**
+**3. What was the first item from the menu purchased by each customer?**
     
     SELECT DISTINCT
     	s.customer_id,
