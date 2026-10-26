@@ -4,7 +4,7 @@
     <img src="https://8weeksqlchallenge.com/images/case-study-designs/1.png" width="200">
 </p>
 
-
+Introdution of the database: The Schema contain four tables: 
 
 **1. What is the total amount each customer spent at the restaurant?**
     
