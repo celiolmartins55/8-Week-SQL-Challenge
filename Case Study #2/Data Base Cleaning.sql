@@ -1,10 +1,10 @@
 UPDATE customer_orders
 SET exclusions = CASE
-    WHEN exclusions LIKE 'null' THEN ' '
+    WHEN exclusions LIKE 'null' THEN ''
     ELSE exclusions
     END,
 	extras = CASE
-    WHEN extras is NULL or extras LIKE 'null' THEN ' '
+    WHEN extras is NULL or extras LIKE 'null' THEN ''
     ELSE extras
 	END;
 
@@ -29,4 +29,3 @@ SET pickup_time = CASE
     WHEN cancellation LIKE 'null' OR cancellation IS NULL THEN ''
     ELSE cancellation
     END;
-
