@@ -51,8 +51,30 @@ SELECT
 FROM customer_orders
 GROUP BY pizza_id;
 --5. How many Vegetarian and Meatlovers were ordered by each customer?
-
+SELECT
+    customer_id,
+    COUNT(pizza_id) FILTER (WHERE pizza_id = 2) AS vegetarian_ordered,
+    COUNT(pizza_id) FILTER (WHERE pizza_id = 1) AS meatlovers_ordered
+FROM customer_orders
+GROUP BY customer_id
+ORDER BY customer_id;
 --6. What was the maximum number of pizzas delivered in a single order?
+WITH maxi_order AS (
+  SELECT
+      c.order_id,
+      COUNT(*) AS pizzas_delivered
+  FROM customer_orders c
+  LEFT JOIN runner_orders r ON c.order_id=r.order_id
+  WHERE cancellation LIKE ''
+  GROUP BY c.order_id
+  ORDER BY c.order_id
+)
+
+SELECT
+    order_id,
+    pizzas_delivered
+FROM maxi_order
+WHERE pizzas_delivered = (SELECT MAX(pizzas_delivered) FROM maxi_order);
 --7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
 --8. How many pizzas were delivered that had both exclusions and extras?
 --9. What was the total volume of pizzas ordered for each hour of the day?
