@@ -2,11 +2,11 @@
 -- Data Clean:
 UPDATE customer_orders
 SET exclusions = CASE
-    WHEN exclusions LIKE 'null' THEN ' '
+    WHEN exclusions LIKE 'null' THEN ''
     ELSE exclusions
     END,
 	extras = CASE
-    WHEN extras is NULL or extras LIKE 'null' THEN ' '
+    WHEN extras is NULL or extras LIKE 'null' THEN ''
     ELSE extras
 	END;
 
@@ -76,6 +76,20 @@ SELECT
 FROM maxi_order
 WHERE pizzas_delivered = (SELECT MAX(pizzas_delivered) FROM maxi_order);
 --7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
+SELECT
+	c.customer_id,
+	SUM(CASE WHEN c.exclusions = '' AND c.extras = '' THEN 1
+        ELSE 0
+       END) AS no_change,
+    SUM(CASE WHEN c.exclusions != '' OR c.extras != '' THEN 1
+        ELSE 0
+        END) AS one_change_at_least
+FROM customer_orders c
+LEFT JOIN runner_orders r ON c.order_id=r.order_id
+WHERE cancellation = ''
+GROUP BY c.customer_id
+ORDER BY c.customer_id;
+    
 --8. How many pizzas were delivered that had both exclusions and extras?
 --9. What was the total volume of pizzas ordered for each hour of the day?
 --10. What was the volume of orders for each day of the week?
