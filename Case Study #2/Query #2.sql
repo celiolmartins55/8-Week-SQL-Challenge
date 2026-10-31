@@ -51,6 +51,7 @@ SELECT
 FROM customer_orders
 GROUP BY pizza_id;
 --5. How many Vegetarian and Meatlovers were ordered by each customer?
+
 --6. What was the maximum number of pizzas delivered in a single order?
 --7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
 --8. How many pizzas were delivered that had both exclusions and extras?
