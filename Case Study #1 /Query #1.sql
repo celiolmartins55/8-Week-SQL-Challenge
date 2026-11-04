@@ -181,4 +181,35 @@ FROM bonus1 b
 LEFT JOIN members me ON b.customer_id=me.customer_id
 ORDER BY b.customer_id, b.order_date;
 
+-- Bonus 2.
+WITH bonus1 AS(
+  SELECT
+  	s.customer_id,
+  	s.order_date,
+  	m.product_name,
+  	m.price
+  FROM sales s 
+  LEFT JOIN menu m ON s.product_id=m.product_id
+  ),
+
+bonus2 AS(
+SELECT b.*,
+	CASE 
+    	WHEN b.order_date >= me.join_date THEN 'Y'
+    	ELSE 'N'
+    END AS member
+FROM bonus1 b 
+LEFT JOIN members me ON b.customer_id=me.customer_id
+)
+
+SELECT *,
+	CASE WHEN member = 'N' THEN null
+    ELSE DENSE_RANK() OVER(
+      PARTITION BY customer_id, member 
+      ORDER BY order_date ASC
+      )
+     END AS ranking
+FROM bonus2
+ORDER BY customer_id, order_date
+
 
