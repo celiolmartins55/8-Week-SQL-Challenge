@@ -260,37 +260,8 @@
 | B           | 820          |
 
 
-**Schema (PostgreSQL v13)**
-
-    CREATE SCHEMA dannys_diner;
-    SET search_path = dannys_diner;
-    
-    CREATE TABLE sales (
-      "customer_id" VARCHAR(1),
-      "order_date" DATE,
-      "product_id" INTEGER
-    );
-    
-    INSERT INTO sales
-      ("customer_id", "order_date", "product_id")
-    VALUES
-      ('A', '2021-01-01', '1'),
-      ('A', '2021-01-01', '2'),
-      ('A', '2021-01-07', '2'),
-      ('A', '2021-01-10', '3'),
-      ('A', '2021-01-11', '3'),
-      ('A', '2021-01-11', '3'),
-      ('B', '2021-01-01', '2'),
-      ('B', '2021-01-02', '2'),
-      ('B', '2021-01-04', '1'),
-      ('B', '2021-01-11', '1'),
-      ('B', '2021-01-16', '3'),
-      ('B', '2021-02-01', '3'),
-      ('C', '2021-01-01', '3'),
-      ('C', '2021-01-01', '3'),
-      ('C', '2021-01-07', '3');
-     
 ---
+The bonus questions involve generating basic data tables through SQL queries.
 
 **Bonus 1**
 
