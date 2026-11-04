@@ -91,5 +91,9 @@ GROUP BY c.customer_id
 ORDER BY c.customer_id;
     
 --8. How many pizzas were delivered that had both exclusions and extras?
+--8. How many pizzas were delivered that had both exclusions and extras?
+WITH both AS(
+  SELECT order_id = CASE
+  WHEN exclusions != '' AND extras != ''
 --9. What was the total volume of pizzas ordered for each hour of the day?
 --10. What was the volume of orders for each day of the week?
