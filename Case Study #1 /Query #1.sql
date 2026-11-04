@@ -158,7 +158,7 @@ JOIN menu m ON s.product_id = m.product_id
 JOIN members mem ON s.customer_id = mem.customer_id
 WHERE s.order_date <= '2021-01-31'
 GROUP BY s.customer_id
-ORDER BY s.customer_id
+ORDER BY s.customer_id;
 
 
 -- Bonus 1. 
