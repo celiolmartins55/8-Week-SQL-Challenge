@@ -160,3 +160,25 @@ WHERE s.order_date <= '2021-01-31'
 GROUP BY s.customer_id
 ORDER BY s.customer_id
 
+
+-- Bonus 1. 
+WITH bonus1 AS(
+  SELECT
+  	s.customer_id,
+  	s.order_date,
+  	m.product_name,
+  	m.price
+  FROM sales s 
+  LEFT JOIN menu m ON s.product_id=m.product_id
+  )
+
+SELECT *,
+	CASE 
+    	WHEN b.order_date >= me.join_date THEN 'Y'
+    	ELSE 'N'
+    END AS member
+FROM bonus1 b 
+LEFT JOIN members me ON b.customer_id=me.customer_id
+ORDER BY b.customer_id, b.order_date;
+
+
