@@ -95,15 +95,17 @@ WITH odboth AS (
     SELECT 
         order_id,
         CASE 
-            WHEN exclusions != '' AND extras != '' THEN 'YES' 
-            ELSE NULL 
+            WHEN exclusions != '' AND extras != '' THEN 'Both'
+  			WHEN exclusions = '' AND extras != '' THEN 'Just extras'
+  			WHEN exclusions != '' AND extras = '' THEN 'Just exclusions'
+            ELSE 'No' 
         END AS order_with_both
     FROM customer_orders
 )
 
 SELECT COUNT(*) 
 FROM odboth
-WHERE order_with_both = 'YES';
+WHERE order_with_both = 'Both';
 
 --9. What was the total volume of pizzas ordered for each hour of the day?
 --10. What was the volume of orders for each day of the week?
