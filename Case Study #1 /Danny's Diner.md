@@ -261,7 +261,7 @@
 
 
 ---
-The bonus questions involve generating basic data tables through SQL queries.
+### The bonus questions involve generating basic data tables through SQL queries.
 
 **Bonus 1**
 
