@@ -259,7 +259,132 @@
 | A           | 1370         |
 | B           | 820          |
 
+
+**Schema (PostgreSQL v13)**
+
+    CREATE SCHEMA dannys_diner;
+    SET search_path = dannys_diner;
+    
+    CREATE TABLE sales (
+      "customer_id" VARCHAR(1),
+      "order_date" DATE,
+      "product_id" INTEGER
+    );
+    
+    INSERT INTO sales
+      ("customer_id", "order_date", "product_id")
+    VALUES
+      ('A', '2021-01-01', '1'),
+      ('A', '2021-01-01', '2'),
+      ('A', '2021-01-07', '2'),
+      ('A', '2021-01-10', '3'),
+      ('A', '2021-01-11', '3'),
+      ('A', '2021-01-11', '3'),
+      ('B', '2021-01-01', '2'),
+      ('B', '2021-01-02', '2'),
+      ('B', '2021-01-04', '1'),
+      ('B', '2021-01-11', '1'),
+      ('B', '2021-01-16', '3'),
+      ('B', '2021-02-01', '3'),
+      ('C', '2021-01-01', '3'),
+      ('C', '2021-01-01', '3'),
+      ('C', '2021-01-07', '3');
+     
 ---
+
+**Bonus 1**
+
+    WITH bonus1 AS(
+      SELECT
+      	s.customer_id,
+      	s.order_date,
+      	m.product_name,
+      	m.price
+      FROM sales s 
+      LEFT JOIN menu m ON s.product_id=m.product_id
+      )
+    
+    SELECT *,
+    	CASE 
+        	WHEN b.order_date >= me.join_date THEN 'Y'
+        	ELSE 'N'
+        END AS member
+    FROM bonus1 b 
+    LEFT JOIN members me ON b.customer_id=me.customer_id
+    ORDER BY b.customer_id, b.order_date;
+
+| customer_id | order_date | product_name | price | customer_id | join_date  | member |
+| ----------- | ---------- | ------------ | ----- | ----------- | ---------- | ------ |
+| A           | 2021-01-01 | sushi        | 10    | A           | 2021-01-07 | N      |
+| A           | 2021-01-01 | curry        | 15    | A           | 2021-01-07 | N      |
+| A           | 2021-01-07 | curry        | 15    | A           | 2021-01-07 | Y      |
+| A           | 2021-01-10 | ramen        | 12    | A           | 2021-01-07 | Y      |
+| A           | 2021-01-11 | ramen        | 12    | A           | 2021-01-07 | Y      |
+| A           | 2021-01-11 | ramen        | 12    | A           | 2021-01-07 | Y      |
+| B           | 2021-01-01 | curry        | 15    | B           | 2021-01-09 | N      |
+| B           | 2021-01-02 | curry        | 15    | B           | 2021-01-09 | N      |
+| B           | 2021-01-04 | sushi        | 10    | B           | 2021-01-09 | N      |
+| B           | 2021-01-11 | sushi        | 10    | B           | 2021-01-09 | Y      |
+| B           | 2021-01-16 | ramen        | 12    | B           | 2021-01-09 | Y      |
+| B           | 2021-02-01 | ramen        | 12    | B           | 2021-01-09 | Y      |
+| C           | 2021-01-01 | ramen        | 12    |             |            | N      |
+| C           | 2021-01-01 | ramen        | 12    |             |            | N      |
+| C           | 2021-01-07 | ramen        | 12    |             |            | N      |
+
+---
+**Bonus 2**
+
+    WITH bonus1 AS(
+      SELECT
+      	s.customer_id,
+      	s.order_date,
+      	m.product_name,
+      	m.price
+      FROM sales s 
+      LEFT JOIN menu m ON s.product_id=m.product_id
+      ),
+    
+    bonus2 AS(
+    SELECT b.*,
+    	CASE 
+        	WHEN b.order_date >= me.join_date THEN 'Y'
+        	ELSE 'N'
+        END AS member
+    FROM bonus1 b 
+    LEFT JOIN members me ON b.customer_id=me.customer_id
+    )
+    
+    SELECT *,
+    	CASE WHEN member = 'N' THEN null
+        ELSE DENSE_RANK() OVER(
+          PARTITION BY customer_id, member 
+          ORDER BY order_date ASC
+          )
+         END AS ranking
+    FROM bonus2
+    ORDER BY customer_id, order_date
+
+| customer_id | order_date | product_name | price | member | ranking |
+| ----------- | ---------- | ------------ | ----- | ------ | ------- |
+| A           | 2021-01-01 | sushi        | 10    | N      |         |
+| A           | 2021-01-01 | curry        | 15    | N      |         |
+| A           | 2021-01-07 | curry        | 15    | Y      | 1       |
+| A           | 2021-01-10 | ramen        | 12    | Y      | 2       |
+| A           | 2021-01-11 | ramen        | 12    | Y      | 3       |
+| A           | 2021-01-11 | ramen        | 12    | Y      | 3       |
+| B           | 2021-01-01 | curry        | 15    | N      |         |
+| B           | 2021-01-02 | curry        | 15    | N      |         |
+| B           | 2021-01-04 | sushi        | 10    | N      |         |
+| B           | 2021-01-11 | sushi        | 10    | Y      | 1       |
+| B           | 2021-01-16 | ramen        | 12    | Y      | 2       |
+| B           | 2021-02-01 | ramen        | 12    | Y      | 3       |
+| C           | 2021-01-01 | ramen        | 12    | N      |         |
+| C           | 2021-01-01 | ramen        | 12    | N      |         |
+| C           | 2021-01-07 | ramen        | 12    | N      |         |
+
+---
+
+
 
 
 
