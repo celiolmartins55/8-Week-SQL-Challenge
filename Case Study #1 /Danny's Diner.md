@@ -307,6 +307,7 @@
 
 ---
 **Bonus 2. Rank All The Things**
+
 <img width="651" height="690" alt="image" src="https://github.com/user-attachments/assets/43422e66-1294-4903-a422-adc00563eda2" />
 
 
