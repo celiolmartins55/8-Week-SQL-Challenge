@@ -306,7 +306,9 @@
 | C           | 2021-01-07 | ramen        | 12    |             |            | N      |
 
 ---
-**Bonus 2**
+**Bonus 2. Rank All The Things**
+<img width="651" height="690" alt="image" src="https://github.com/user-attachments/assets/43422e66-1294-4903-a422-adc00563eda2" />
+
 
     WITH bonus1 AS(
       SELECT
