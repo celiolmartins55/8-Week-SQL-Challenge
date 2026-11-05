@@ -261,9 +261,12 @@
 
 
 ---
-### The bonus questions involve generating basic data tables through SQL queries.
+### The bonus questions involve recreate basic data tables through SQL queries.
 
-**Bonus 1**
+**Bonus 1. Join All The Things**
+
+<img width="555" height="688" alt="image" src="https://github.com/user-attachments/assets/27fc1a1d-25ee-4619-9e8b-24c15e03de3c" />
+
 
     WITH bonus1 AS(
       SELECT
