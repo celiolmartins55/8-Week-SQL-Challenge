@@ -267,6 +267,8 @@
 
 <img width="555" height="688" alt="image" src="https://github.com/user-attachments/assets/27fc1a1d-25ee-4619-9e8b-24c15e03de3c" />
 
+<br>
+
 
     WITH bonus1 AS(
       SELECT
