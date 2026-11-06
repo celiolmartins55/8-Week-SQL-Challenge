@@ -267,7 +267,7 @@
 
 <img width="555" height="688" alt="image" src="https://github.com/user-attachments/assets/27fc1a1d-25ee-4619-9e8b-24c15e03de3c" />
 
-<br>
+<br/>
 
 
     WITH bonus1 AS(
@@ -312,6 +312,7 @@
 
 <img width="651" height="690" alt="image" src="https://github.com/user-attachments/assets/43422e66-1294-4903-a422-adc00563eda2" />
 
+<br/>
 
     WITH bonus1 AS(
       SELECT
