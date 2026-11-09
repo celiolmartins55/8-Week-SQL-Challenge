@@ -47,6 +47,8 @@ Customers A and B spent nearly identical amount at Danny's Diner, whereas Custom
 | B           | 6            |
 | C           | 2            |
 
+As anticipated from the result from Question 1, Customer C recorded the fewest visits to the restaurant.
+
 ---
 **3. What was the first item from the menu purchased by each customer?**
     
@@ -67,6 +69,8 @@ Customers A and B spent nearly identical amount at Danny's Diner, whereas Custom
 | B           | curry        |
 | C           | ramen        |
 
+The findings highlight distinct behavioural variations across the three customer profiles in the firts visit to the restaurant.
+
 ---
 **4. What is the most purchased item on the menu and how many times was it purchased by all customers?**
     
@@ -83,6 +87,8 @@ Customers A and B spent nearly identical amount at Danny's Diner, whereas Custom
 | product_name | total_purchases |
 | ------------ | --------------- |
 | ramen        | 8               |
+
+Although ramen was the initial purchase only for Customer C, it emerged as the most frequently ordered item overall.
 
 ---
 **5. Which item was the most popular for each customer?**
@@ -115,6 +121,8 @@ Customers A and B spent nearly identical amount at Danny's Diner, whereas Custom
 | B           | curry        | 2        |
 | B           | sushi        | 2        |
 | C           | ramen        | 3        |
+
+Ramen emerged as the favourite item both overall and among individual customers. Furthermore, Customer B exhibited highly varied purchasing preferences.
 
 ---
 **6. Which item was purchased first by the customer after they became a member?**
