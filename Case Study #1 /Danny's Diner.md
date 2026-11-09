@@ -1,10 +1,7 @@
 # 🍽 Case Study #1 - Danny's Diner
 
-<p align="center">
-    <img src="https://8weeksqlchallenge.com/images/case-study-designs/1.png" width="200">
-</p>
 
----
+
 ### Database Overview: The schema comprises three tables: `sales`, `menu` and `members`. The relationships between these entities are structured as follows:
 
 
