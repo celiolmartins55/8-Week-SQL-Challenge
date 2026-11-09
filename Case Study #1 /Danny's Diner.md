@@ -30,6 +30,8 @@
 | B           | 74                 |
 | C           | 36                 |
 
+Customers A and B spent nearly identical amount at Danny's Diner, whereas Customer C spent less than half.
+
 ---
 **2. How many days has each customer visited the restaurant?**
     
