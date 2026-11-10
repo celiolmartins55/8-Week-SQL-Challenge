@@ -153,6 +153,8 @@ Ramen emerged as the favourite item both overall and among individual customers.
 | ramen        | A           | 2021-01-10 |
 | sushi        | B           | 2021-01-11 |
 
+The key finding is that Customer C did not become a member.
+
 ---
 **7. Which item was purchased just before the customer became a member?**
 
@@ -184,6 +186,8 @@ Ramen emerged as the favourite item both overall and among individual customers.
 | sushi        | A           | 2021-01-01 |
 | curry        | A           | 2021-01-01 |
 | sushi        | B           | 2021-01-04 |
+
+Evidence suggests that sushi was a key driver in membership. 
 
 ---
 **8. What is the total items and amount spent for each member before they became a member?**
