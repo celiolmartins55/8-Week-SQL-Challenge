@@ -220,6 +220,8 @@ Evidence suggests that sushi was a key driver in membership.
 | A           | 2           | 25           |
 | B           | 3           | 40           |
 
+Customers A and B exhibited almost an identical average expenditure per item.
+
 ---
 
 **9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?**
@@ -246,6 +248,8 @@ Evidence suggests that sushi was a key driver in membership.
 | A           | 860          |
 | B           | 940          |
 | C           | 360          |
+
+Although Customers A and B exhibited similar overall expenditure, Customer A accumulated a substantially higher points total. 
 
 ---
 **10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?**
