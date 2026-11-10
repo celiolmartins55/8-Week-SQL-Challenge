@@ -6,5 +6,5 @@ The first case study focuses on Danny's Diner. Danny operates a small restaurant
 
 📂 Directory Structure:
 - 📃`Danny's Diner.md`: A document containing the questions along with the SQL queries, the resulting output tables and insights.
-- 🛠`QUery #1.sql`: The raw SQL script, ready for copy and execution in any SQL environment.
+- 🛠`Query #1.sql`: The raw SQL script, ready for copy and execution in any SQL environment.
 - ⚙`Schema #1.sql`: The database schema configuration, required to create and populate the tables prior to querying.
