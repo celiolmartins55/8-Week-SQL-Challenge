@@ -274,6 +274,7 @@ Although Customers A and B exhibited similar overall expenditure, Customer A acc
 | A           | 1370         |
 | B           | 820          |
 
+By incorporating the first-week membership bonus and restricting the dataset to the end of January, Customer A extended their lead. 
 
 ---
 ### The bonus questions involve recreate basic data tables through SQL queries.
