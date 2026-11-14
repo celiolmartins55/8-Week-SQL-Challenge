@@ -115,3 +115,10 @@ FROM customer_orders
 GROUP BY EXTRACT(HOUR FROM order_time)
 ORDER BY hour;
 --10. What was the volume of orders for each day of the week?
+SELECT 
+    TO_CHAR(order_time, 'Day') AS day_week, 
+    COUNT(order_id) AS volume_orders
+FROM 
+    customer_orders
+GROUP BY TO_CHAR(order_time, 'Day')
+ORDER BY volume_orders DESC;
