@@ -1,4 +1,6 @@
 
+<img align='center' width="200" height="1080" alt="image" src="https://github.com/user-attachments/assets/1966269f-9306-4083-b670-786c62d55e67" />
+
 
 
 Danny aims to establish a new pizza empire, leveraging data analytics to drive substantial business growth. To achieve this, he has formulated a comprehensive set of analytical questions, categorising them into distinct focus areas:
