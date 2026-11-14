@@ -108,4 +108,10 @@ FROM odboth
 WHERE order_with_both = 'Both';
 
 --9. What was the total volume of pizzas ordered for each hour of the day?
+ SELECT
+ 	EXTRACT(HOUR FROM order_time) AS hour,
+ 	COUNT(*)
+FROM customer_orders
+GROUP BY EXTRACT(HOUR FROM order_time)
+ORDER BY hour;
 --10. What was the volume of orders for each day of the week?
