@@ -27,13 +27,17 @@
 **3. How many successful orders were delivered by each runner?**
 
     SELECT
+    	runner_id,
     	COUNT (*) as orders_delivered
     FROM runner_orders
-    WHERE cancellation LIKE '';
+    WHERE cancellation LIKE ''
+    GROUP BY runner_id;
 
-| orders_delivered |
-| ---------------- |
-| 8                |
+| runner_id | orders_delivered |
+| --------- | ---------------- |
+| 1         | 4                |
+| 2         | 3                |
+| 3         | 1                |
 
 ---
 **4. How many of each type of pizza was delivered?**
