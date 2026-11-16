@@ -1,5 +1,5 @@
 --A. Pizza Metrics
--- Data Clean:
+-- Data Cleaning:
 UPDATE customer_orders
 SET exclusions = CASE
     WHEN exclusions LIKE 'null' THEN ''
