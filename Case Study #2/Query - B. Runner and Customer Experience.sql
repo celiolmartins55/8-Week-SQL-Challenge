@@ -1,3 +1,5 @@
+-- B. Runner and Customer Experience
+-- Data Cleaning
 -- Removing NULL records within the customer_orders table
 UPDATE customer_orders
 SET exclusions = CASE
@@ -31,7 +33,7 @@ SET pickup_time = CASE
     WHEN cancellation LIKE 'null' OR cancellation IS NULL THEN ''
     ELSE cancellation
     END;
--- B. Runner and Customer Experience
+
 -- 1.How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)
 SELECT 
     (DATE_TRUNC('week', registration_date + 3)::DATE) - 3 AS week_start_date,
