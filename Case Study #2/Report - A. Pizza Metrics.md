@@ -12,6 +12,8 @@
 | ------ |
 | 14     |
 
+The total of pizzas ordered was 14.
+
 ---
 **2. How many unique customer orders were made?**
     
@@ -23,6 +25,8 @@
 | ------------ |
 | 10           |
 
+Given a total volume of 14 pizzas across 10 distinct orders, it is evident that several orders contained multiple items.
+
 ---
 **3. How many successful orders were delivered by each runner?**
 
@@ -31,7 +35,8 @@
     	COUNT (*) as orders_delivered
     FROM runner_orders
     WHERE cancellation LIKE ''
-    GROUP BY runner_id;
+    GROUP BY runner_id
+    ORDER BY runner_id;;
 
 | runner_id | orders_delivered |
 | --------- | ---------------- |
