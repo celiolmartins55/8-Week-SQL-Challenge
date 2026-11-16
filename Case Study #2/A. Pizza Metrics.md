@@ -1,9 +1,8 @@
 # Case Study #2- A.Pizza Metrics
 
----
-**Query #3**
+### Following the `Data Cleaning` phase, the case study advances to the first analytical area: Pizza Metrics.
 
-    --1. How many pizzas were ordered?
+**1. How many pizzas were ordered?**
     SELECT 
     	COUNT(*) as pizzas
     FROM customer_orders;
@@ -13,9 +12,7 @@
 | 14     |
 
 ---
-**Query #4**
-
-    --2. How many unique customer orders were made?
+**2. How many unique customer orders were made?**
     SELECT
     	 COUNT(DISTINCT order_id) as unique_oders
      FROM customer_orders;
@@ -25,9 +22,8 @@
 | 10           |
 
 ---
-**Query #5**
+**3. How many successful orders were delivered by each runner?**
 
-    --3. How many successful orders were delivered by each runner?
     SELECT
     	COUNT (*) as orders_delivered
     FROM runner_orders
@@ -38,9 +34,8 @@
 | 8                |
 
 ---
-**Query #6**
+**4. How many of each type of pizza was delivered?**
 
-    --4. How many of each type of pizza was delivered?
     SELECT
     	pizza_id,
     	COUNT (*)
@@ -53,9 +48,8 @@
 | 1        | 10    |
 
 ---
-**Query #7**
+**5. How many Vegetarian and Meatlovers were ordered by each customer?**
 
-    --5. How many Vegetarian and Meatlovers were ordered by each customer?
     SELECT
         customer_id,
         COUNT(pizza_id) FILTER (WHERE pizza_id = 2) AS vegetarian_ordered,
@@ -73,9 +67,8 @@
 | 105         | 1                  | 0                  |
 
 ---
-**Query #8**
+**6. What was the maximum number of pizzas delivered in a single order?**
 
-    --6. What was the maximum number of pizzas delivered in a single order?
     WITH maxi_order AS (
       SELECT
           c.order_id,
@@ -98,9 +91,8 @@
 | 4        | 3                |
 
 ---
-**Query #9**
+**7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?**
 
-    --7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
     SELECT
     	c.customer_id,
     	SUM(CASE WHEN c.exclusions = '' AND c.extras = '' THEN 1
@@ -124,9 +116,8 @@
 | 105         | 0         | 1                   |
 
 ---
-**Query #10**
+**8. How many pizzas were delivered that had both exclusions and extras?**
 
-    --8. How many pizzas were delivered that had both exclusions and extras?
     WITH odboth AS (
         SELECT 
             order_id,
@@ -148,9 +139,8 @@
 | 2     |
 
 ---
-**Query #11**
+**9. What was the total volume of pizzas ordered for each hour of the day?**
 
-    --9. What was the total volume of pizzas ordered for each hour of the day?
      SELECT
      	EXTRACT(HOUR FROM order_time) AS hour,
      	COUNT(*)
@@ -168,9 +158,8 @@
 | 23   | 3     |
 
 ---
-**Query #12**
+**10. What was the volume of orders for each day of the week?**
 
-    --10. What was the volume of orders for each day of the week?
     SELECT 
         TO_CHAR(order_time, 'Day') AS day_week, 
         COUNT(order_id) AS volume_orders
@@ -186,6 +175,4 @@
 | Thursday  | 3             |
 | Friday    | 1             |
 
----
 
-[View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
