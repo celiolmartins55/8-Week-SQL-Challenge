@@ -3,6 +3,7 @@
 ### Following the `Data Cleaning` phase, the case study advances to the first analytical area: Pizza Metrics.
 
 **1. How many pizzas were ordered?**
+    
     SELECT 
     	COUNT(*) as pizzas
     FROM customer_orders;
@@ -13,6 +14,7 @@
 
 ---
 **2. How many unique customer orders were made?**
+    
     SELECT
     	 COUNT(DISTINCT order_id) as unique_oders
      FROM customer_orders;
