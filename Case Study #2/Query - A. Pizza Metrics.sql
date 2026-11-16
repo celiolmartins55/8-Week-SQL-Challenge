@@ -41,9 +41,12 @@ SELECT
  FROM customer_orders;
 --3. How many successful orders were delivered by each runner?
 SELECT
+	runner_id,
 	COUNT (*) as orders_delivered
 FROM runner_orders
-WHERE cancellation LIKE '';
+WHERE cancellation LIKE ''
+GROUP BY runner_id
+ORDER BY runner_id;
 --4. How many of each type of pizza was delivered?
 SELECT
 	pizza_id,
