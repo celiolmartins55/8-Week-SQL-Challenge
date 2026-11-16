@@ -1,3 +1,4 @@
+-- Removing NULL records within the customer_orders table
 UPDATE customer_orders
 SET exclusions = CASE
     WHEN exclusions LIKE 'null' THEN ''
@@ -8,6 +9,7 @@ SET exclusions = CASE
     ELSE extras
 	END;
 
+-- Removing NULL values and standardising records within the runner_orders table
 UPDATE runner_orders
 SET pickup_time = CASE
     WHEN pickup_time = 'null' THEN ''
