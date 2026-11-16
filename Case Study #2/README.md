@@ -15,6 +15,7 @@
 - Bonus DML Challenges (DML = Data Manipulation Language)
 
 📂 Directory Structure:
-- 📃`Danny's Diner.md`: A document containing the questions along with the SQL queries, the resulting output tables and insights.
-- 🛠`Query.sql`: The raw SQL script, ready for copy and execution in any SQL environment (Each area have a own Query.sql).
+- 🧹`Data Cleaning.sql`: 
+- 📃`".md`: A document containing the questions along with the SQL queries, the resulting output tables and insights (Each area have a own .md and Query.sql).
+- 🛠`Query.sql`: The raw SQL script, ready for copy and execution in any SQL environment.
 - ⚙`Schema.sql`: The database schema configuration, required to create and populate the tables prior to querying.
