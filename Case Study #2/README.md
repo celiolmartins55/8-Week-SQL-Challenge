@@ -22,6 +22,6 @@
 **Obs:  Each area have a own Report.md and Query.sql*
 
 ---
-👓 **Database Overview**: The schema comprises three tables: sales, menu and members. The relationships between these entities are structured as follows:
+👓 **Database Overview**: The schema comprises six tables: runners, runner_orders, customer_orders, pizza_names, pizza_recipes and pizza_toppings. The relationships between these entities are structured as follows:
 
 <img width="1788" height="691" alt="image" src="https://github.com/user-attachments/assets/3445ddae-e15e-4730-91b8-3c99e32f837c" />
