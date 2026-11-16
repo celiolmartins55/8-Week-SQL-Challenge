@@ -2,12 +2,7 @@
 
 
 
-### Database Overview: The schema comprises three tables: `sales`, `menu` and `members`. The relationships between these entities are structured as follows:
 
-
-<img align="center" width="800" height="390" alt="image" src="https://github.com/user-attachments/assets/d31c879b-65f0-4054-a2fb-64763658920c" />
-
----
 
 ### This challenge features ten case study questions alongside two bonus questions. Outlined below are the questions, the corresponding SQL queries, and the resulting output tables.
 
