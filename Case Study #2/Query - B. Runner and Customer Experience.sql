@@ -92,4 +92,25 @@ SELECT
 	MAX(DURATION)-MIN(DURATION) AS difference_max_min
  FROM runner_orders;
 -- 6.What was the average speed for each runner for each delivery and do you notice any trend for these values?
+SELECT
+	runner_id,
+	order_id,
+    ROUND((distance/ (duration::numeric/60)),2) AS avg_speed
+FROM runner_orders
+WHERE distance IS NOT NULL
+ORDER BY runner_id;
+
+SELECT
+	runner_id,
+    ROUND(AVG((distance/ (duration::numeric/60))),2) AS avg_speed
+FROM runner_orders
+WHERE distance IS NOT NULL
+GROUP BY runner_id
+ORDER BY runner_id;
+
+SELECT
+    ROUND(AVG((distance/ (duration::numeric/60))),2) AS avg_speed
+FROM runner_orders
+WHERE distance IS NOT NULL;
+
 -- 7.What is the successful delivery percentage for each runner?
