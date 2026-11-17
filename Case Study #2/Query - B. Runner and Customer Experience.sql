@@ -34,15 +34,31 @@ SET pickup_time = CASE
     ELSE cancellation
     END;
 
--- 1.How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)
-SELECT 
-    (DATE_TRUNC('week', registration_date + 3)::DATE) - 3 AS week_start_date,
-    COUNT(runner_id) AS runners_signed_up,
-    (DATE_TRUNC('week', registration_date + 3)::DATE) + 3 AS week_end_date
-FROM runners
-GROUP BY week_start_date, week_end_date
-ORDER BY week_start_date;
+-- Altering the type of several columns
+ALTER TABLE runner_orders
+ALTER COLUMN pickup_time TYPE TIMESTAMP USING NULLIF(pickup_time, '')::TIMESTAMP;
+
+
 -- 2.What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
+WITH table_two AS (
+  SELECT 
+  	DISTINCT r.order_id,
+  	c.order_time,
+  	r.pickup_time,
+  	r.runner_id
+  FROM customer_orders c RIGHT JOIN  runner_orders r ON c.order_id=r.order_id
+  WHERE r.pickup_time IS NOT NULL
+  ORDER BY r.order_id
+)
+ 
+
+SELECT
+	runner_id,
+    ROUND(AVG(EXTRACT(EPOCH FROM (pickup_time-order_time))/60)::NUMERIC,3) AS average_minutes
+FROM table_two
+GROUP BY runner_id
+ORDER BY runner_id;
+
 -- 3.Is there any relationship between the number of pizzas and how long the order takes to prepare?
 -- 4.What was the average distance travelled for each customer?
 -- 5.What was the difference between the longest and shortest delivery times for all orders?
