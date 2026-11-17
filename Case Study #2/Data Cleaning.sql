@@ -34,4 +34,6 @@ SET pickup_time = CASE
 
 -- Altering the type of several columns
 ALTER TABLE runner_orders
-ALTER COLUMN pickup_time TYPE TIMESTAMP USING NULLIF(pickup_time, '')::TIMESTAMP;
+ALTER COLUMN pickup_time TYPE TIMESTAMP USING NULLIF(pickup_time, '')::TIMESTAMP,
+ALTER COLUMN distance TYPE NUMERIC USING NULLIF(distance, '')::NUMERIC,
+ALTER COLUMN duration TYPE INTEGER USING NULLIF(duration, '')::INTEGER;
