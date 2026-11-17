@@ -76,14 +76,14 @@ WITH table_three AS (
  
 SELECT
 	pizza_numbers,
-    EXTRACT(EPOCH FROM (pickup_time-order_time))/60 AS long_order
+    ROUND(EXTRACT(EPOCH FROM (pickup_time-order_time)/60)::NUMERIC,3) AS long_order
 FROM table_three
 ORDER BY pizza_numbers;
 
 -- 4.What was the average distance travelled for each customer?
 SELECT
   	c.customer_id,
-    AVG(r.distance)
+    ROUND(AVG(r.distance),3)
 FROM customer_orders c LEFT JOIN  runner_orders r ON c.order_id=r.order_id
 GROUP BY c.customer_id
 ORDER BY c.customer_id;
@@ -109,8 +109,21 @@ GROUP BY runner_id
 ORDER BY runner_id;
 
 SELECT
-    ROUND(AVG((distance/ (duration::numeric/60))),2) AS avg_speed
+    ROUND(AVG((distance/ (duration::numeric/60))),3)  AS avg_speed
 FROM runner_orders
 WHERE distance IS NOT NULL;
-
 -- 7.What is the successful delivery percentage for each runner?
+WITH table_seven AS (
+  SELECT
+	runner_id,
+    COUNT(order_id) AS order_suc
+  FROM runner_orders
+  WHERE duration IS NOT NULL
+  GROUP BY runner_id)
+
+SELECT
+	r.runner_id,
+	ROUND(100.0*t.order_suc/COUNT(r.order_id),2) || '%' AS successful_delivery_percentage
+FROM runner_orders r LEFT JOIN table_seven t ON r.runner_id = t.runner_id
+GROUP BY r.runner_id, t.order_suc
+ORDER BY r.runner_id;
