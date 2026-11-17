@@ -31,3 +31,7 @@ SET pickup_time = CASE
     WHEN cancellation LIKE 'null' OR cancellation IS NULL THEN ''
     ELSE cancellation
     END;
+
+-- Altering the type of several columns
+ALTER TABLE runner_orders
+ALTER COLUMN pickup_time TYPE TIMESTAMP USING NULLIF(pickup_time, '')::TIMESTAMP;
