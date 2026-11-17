@@ -60,7 +60,31 @@ GROUP BY runner_id
 ORDER BY runner_id;
 
 -- 3.Is there any relationship between the number of pizzas and how long the order takes to prepare?
+WITH table_three AS (
+  SELECT 
+  	DISTINCT r.order_id,
+  	COUNT(c.customer_id) AS pizza_numbers,
+  	c.order_time,
+  	r.pickup_time
+  FROM customer_orders c RIGHT JOIN  runner_orders r ON c.order_id=r.order_id
+  WHERE r.pickup_time IS NOT NULL
+  GROUP BY r.order_id, c.order_time, r.pickup_time
+  ORDER BY r.order_id
+)
+ 
+SELECT
+	pizza_numbers,
+    EXTRACT(EPOCH FROM (pickup_time-order_time))/60 AS long_order
+FROM table_three
+ORDER BY pizza_numbers;
+
 -- 4.What was the average distance travelled for each customer?
+SELECT
+  	c.customer_id,
+    AVG(r.distance)
+FROM customer_orders c LEFT JOIN  runner_orders r ON c.order_id=r.order_id
+GROUP BY c.customer_id
+ORDER BY c.customer_id;
 -- 5.What was the difference between the longest and shortest delivery times for all orders?
 -- 6.What was the average speed for each runner for each delivery and do you notice any trend for these values?
 -- 7.What is the successful delivery percentage for each runner?
