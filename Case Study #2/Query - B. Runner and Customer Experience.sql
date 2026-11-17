@@ -36,7 +36,9 @@ SET pickup_time = CASE
 
 -- Altering the type of several columns
 ALTER TABLE runner_orders
-ALTER COLUMN pickup_time TYPE TIMESTAMP USING NULLIF(pickup_time, '')::TIMESTAMP;
+ALTER COLUMN pickup_time TYPE TIMESTAMP USING NULLIF(pickup_time, '')::TIMESTAMP,
+ALTER COLUMN distance TYPE NUMERIC USING NULLIF(distance, '')::NUMERIC,
+ALTER COLUMN duration TYPE INTEGER USING NULLIF(duration, '')::INTEGER;
 
 
 -- 2.What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
@@ -86,5 +88,8 @@ FROM customer_orders c LEFT JOIN  runner_orders r ON c.order_id=r.order_id
 GROUP BY c.customer_id
 ORDER BY c.customer_id;
 -- 5.What was the difference between the longest and shortest delivery times for all orders?
+SELECT
+	MAX(DURATION)-MIN(DURATION) AS difference_max_min
+ FROM runner_orders;
 -- 6.What was the average speed for each runner for each delivery and do you notice any trend for these values?
 -- 7.What is the successful delivery percentage for each runner?
