@@ -1,8 +1,5 @@
 -- C. Ingredient Optimisation
 
-
-
-
 -- Removing NULL records within the customer_orders table
 UPDATE customer_orders
 SET exclusions = CASE
