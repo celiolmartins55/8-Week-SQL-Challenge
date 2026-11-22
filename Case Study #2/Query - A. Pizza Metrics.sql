@@ -81,19 +81,17 @@ FROM maxi_order
 WHERE pizzas_delivered = (SELECT MAX(pizzas_delivered) FROM maxi_order);
 --7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
 SELECT
-	c.customer_id,
-	SUM(CASE WHEN c.exclusions = '' AND c.extras = '' THEN 1
-        ELSE 0
-       END) AS no_change,
-    SUM(CASE WHEN c.exclusions != '' OR c.extras != '' THEN 1
-        ELSE 0
-        END) AS one_change_at_least
+    COALESCE(c.customer_id::VARCHAR, 'Total') AS customer_id,
+    SUM(CASE WHEN c.exclusions = '' AND c.extras = '' THEN 1 ELSE 0 END) AS no_change,
+    SUM(CASE WHEN c.exclusions != '' OR c.extras != '' THEN 1 ELSE 0 END) AS one_change_at_least
 FROM customer_orders c
-LEFT JOIN runner_orders r ON c.order_id=r.order_id
-WHERE cancellation = ''
-GROUP BY c.customer_id
-ORDER BY c.customer_id;
-    
+LEFT JOIN runner_orders r 
+    ON c.order_id = r.order_id
+WHERE r.cancellation = ''
+GROUP BY ROLLUP(c.customer_id)
+ORDER BY 
+    CASE WHEN c.customer_id IS NULL THEN 1 ELSE 0 END, 
+    c.customer_id;
 --8. How many pizzas were delivered that had both exclusions and extras?
 WITH odboth AS (
     SELECT 
