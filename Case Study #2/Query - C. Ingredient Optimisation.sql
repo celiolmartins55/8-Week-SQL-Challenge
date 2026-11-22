@@ -61,12 +61,22 @@ WITH table_two AS(
     	TRIM(UNNEST(STRING_TO_ARRAY(extras, ',')))::INTEGER AS extras_id
 	FROM customer_orders)
 SELECT
-	topping_name,
+	topping_name AS most_commonly_extra,
     COUNT(t2.extras_id) AS count_extra
 FROM table_two t2 LEFT JOIN pizza_toppings pt ON extras_id = topping_id
 GROUP BY pt.topping_name
 ORDER BY count_extra DESC LIMIT 1;
 -- 3.What was the most common exclusion?
+WITH table_three AS(
+	SELECT
+    	TRIM(UNNEST(STRING_TO_ARRAY(exclusions, ',')))::INTEGER AS exclusions_id
+	FROM customer_orders)
+SELECT
+	topping_name AS most_common_exclusion,
+    COUNT(t3.exclusions_id) AS count_exclusions
+FROM table_three t3 LEFT JOIN pizza_toppings pt ON exclusions_id = topping_id
+GROUP BY pt.topping_name
+ORDER BY count_exclusions DESC LIMIT 1;
 -- 4.Generate an order item for each record in the customers_orders table in the format of one of the following:
 -- Meat Lovers
 -- Meat Lovers - Exclude Beef
