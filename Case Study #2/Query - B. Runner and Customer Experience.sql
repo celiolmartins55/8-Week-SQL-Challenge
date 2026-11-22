@@ -1,4 +1,5 @@
 -- B. Runner and Customer Experience
+
 -- Data Cleaning
 -- Removing NULL records within the customer_orders table
 UPDATE customer_orders
