@@ -1,4 +1,5 @@
 --A. Pizza Metrics
+
 -- Data Cleaning:
 UPDATE customer_orders
 SET exclusions = CASE
