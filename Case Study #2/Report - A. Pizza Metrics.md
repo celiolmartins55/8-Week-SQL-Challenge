@@ -45,6 +45,8 @@ Given a total volume of 14 pizzas across 10 distinct orders, it is evident that 
 | 2         | 3                |
 | 3         | 1                |
 
+Runner 3 recorded a substantially lower delivery volume compared to Runners 1 and 2.
+
 ---
 **4. How many of each type of pizza was delivered?**
 
@@ -58,6 +60,8 @@ Given a total volume of 14 pizzas across 10 distinct orders, it is evident that 
 | -------- | ----- |
 | 2        | 4     |
 | 1        | 10    |
+
+Pizza 1 recorded the highest order volume, making it the clear customer favourite
 
 ---
 **5. How many Vegetarian and Meatlovers were ordered by each customer?**
@@ -77,6 +81,8 @@ Given a total volume of 14 pizzas across 10 distinct orders, it is evident that 
 | 103         | 1                  | 3                  |
 | 104         | 0                  | 3                  |
 | 105         | 1                  | 0                  |
+
+Customer 105 was the only customer to exhibit a preference for the Vegetarian option over the Meatlovers; however, this observation is based on a single transaction.
 
 ---
 **6. What was the maximum number of pizzas delivered in a single order?**
@@ -101,6 +107,8 @@ Given a total volume of 14 pizzas across 10 distinct orders, it is evident that 
 | order_id | pizzas_delivered |
 | -------- | ---------------- |
 | 4        | 3                |
+
+
 
 ---
 **7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?**
