@@ -135,6 +135,7 @@ The volume of pizza in a single order did not exceed three.
 | 105         | 0         | 1                   |
 | Total       | 6         | 6                   |
 
+The only customer who placed orders both with and without changes was Customer 104.
 
 ---
 **8. How many pizzas were delivered that had both exclusions and extras?**
@@ -159,6 +160,8 @@ The volume of pizza in a single order did not exceed three.
 | ----- |
 | 2     |
 
+Only two pizzas had both exclusions and extras.
+
 ---
 **9. What was the total volume of pizzas ordered for each hour of the day?**
 
@@ -178,6 +181,8 @@ The volume of pizza in a single order did not exceed three.
 | 21   | 3     |
 | 23   | 3     |
 
+The time of day that had the highest order volume was the night.
+
 ---
 **10. What was the volume of orders for each day of the week?**
 
@@ -196,4 +201,4 @@ The volume of pizza in a single order did not exceed three.
 | Thursday  | 3             |
 | Friday    | 1             |
 
-
+The days with the highest volume of orders were Saturday and Wednesday. Given this, we cannot associate a high volume of orders with the midweek or the weekend.
