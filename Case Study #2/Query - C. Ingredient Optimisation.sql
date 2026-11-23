@@ -82,6 +82,63 @@ ORDER BY count_exclusions DESC LIMIT 1;
 -- Meat Lovers - Exclude Beef
 -- Meat Lovers - Extra Bacon
 -- Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
+WITH numbered_orders AS (
+    SELECT 
+        order_id,
+        customer_id,
+        pizza_id,
+        exclusions,
+        extras,
+        ROW_NUMBER() OVER (ORDER BY order_id) AS record_id
+    FROM customer_orders
+),
+exclusions_cte AS (
+    SELECT 
+        record_id,
+        TRIM(UNNEST(STRING_TO_ARRAY(exclusions, ',')))::INTEGER AS topping_id
+    FROM numbered_orders
+    WHERE exclusions != ''
+),
+exclusions_names AS (
+    SELECT 
+        e.record_id,
+        STRING_AGG(pt.topping_name, ', ') AS exclusions_list
+    FROM exclusions_cte e
+    JOIN pizza_toppings pt ON e.topping_id = pt.topping_id
+    GROUP BY e.record_id
+),
+extras_cte AS (
+    SELECT 
+        record_id,
+        TRIM(UNNEST(STRING_TO_ARRAY(extras, ',')))::INTEGER AS topping_id
+    FROM numbered_orders
+    WHERE extras != ''
+),
+extras_names AS (
+    SELECT 
+        e.record_id,
+        STRING_AGG(pt.topping_name, ', ') AS extras_list
+    FROM extras_cte e
+    JOIN pizza_toppings pt ON e.topping_id = pt.topping_id
+    GROUP BY e.record_id
+)
+
+SELECT 
+    n.order_id,
+    n.customer_id,
+    CONCAT(
+        pn.pizza_name,
+        CASE WHEN ex.exclusions_list IS NOT NULL THEN ' - Exclude ' || ex.exclusions_list ELSE '' END,
+        CASE WHEN xt.extras_list IS NOT NULL THEN ' - Extra ' || xt.extras_list ELSE '' END
+    ) AS order_item
+FROM numbered_orders n
+JOIN pizza_names pn 
+    ON n.pizza_id = pn.pizza_id
+LEFT JOIN exclusions_names ex 
+    ON n.record_id = ex.record_id
+LEFT JOIN extras_names xt 
+    ON n.record_id = xt.record_id
+ORDER BY n.order_id, n.record_id;
 -- 5.Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
 -- For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
 -- 6.What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
