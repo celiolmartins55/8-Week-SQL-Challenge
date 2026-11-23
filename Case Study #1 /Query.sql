@@ -11,12 +11,14 @@ LEFT JOIN
 menu m ON s.product_id=m.product_id
 GROUP BY s.customer_id
 ORDER BY s.customer_id ASC;
+
 -- 2. How many days has each customer visited the restaurant?
 SELECT
 	s.customer_id,
     COUNT(DISTINCT s.order_date) as Days_Visited
 FROM sales s
 GROUP BY customer_id;
+
 -- 3. What was the first item from the menu purchased by each customer?
 SELECT DISTINCT
 	s.customer_id,
@@ -27,7 +29,8 @@ menu m ON s.product_id=m.product_id
 WHERE s.order_date = (
   						SELECT MIN(s2.order_date)
                         FROM sales s2
-                        WHERE s.customer_id=s2.customer_id);                                 
+                        WHERE s.customer_id=s2.customer_id);
+
 -- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 SELECT
 	m.product_name,
@@ -38,6 +41,7 @@ menu m ON s.product_id=m.product_id
 GROUP BY m.product_name
 ORDER BY total_purchases DESC
 LIMIT 1;
+
 -- 5. Which item was the most popular for each customer?
 WITH RankProdutos AS (
     SELECT
@@ -59,6 +63,7 @@ SELECT
     quantity
 FROM RankProdutos
 WHERE ranking=1;
+
 -- 6. Which item was purchased first by the customer after they became a member?
 WITH posmember AS(
 	SELECT
@@ -80,6 +85,7 @@ WHERE b.order_date = (
   						SELECT MIN(s2.order_date)
                         FROM posmember s2
                         WHERE b.customer_id=s2.customer_id); 
+
 -- 7. Which item was purchased just before the customer became a member?
 WITH premember AS(
 	SELECT
@@ -103,6 +109,7 @@ FROM premember b
 LEFT JOIN menu m ON b.product_id = m.product_id
 WHERE RANKING = 1
 ORDER BY b.customer_id ASC;
+
 -- 8. What is the total items and amount spent for each member before they became a member?
 WITH premember AS(
 	SELECT
@@ -126,6 +133,7 @@ FROM premember b
 LEFT JOIN menu m ON b.product_id = m.product_id
 GROUP BY customer_id
 ORDER BY customer_id;
+
 -- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 WITH cte_point AS(
 	SELECT
@@ -143,6 +151,7 @@ FROM sales s
 LEFT JOIN cte_point p ON s.product_id = p.product_id
 GROUP BY s.customer_id
 ORDER BY s.customer_id;
+
 -- 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 SELECT
     s.customer_id,
