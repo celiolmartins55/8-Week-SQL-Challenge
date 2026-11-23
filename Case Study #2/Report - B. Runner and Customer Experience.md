@@ -7,12 +7,13 @@
 **1.How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)**
 
     SELECT 
-        (DATE_TRUNC('week', registration_date + 3)::DATE)  AS week_start_date,
-        ((DATE_TRUNC('week', registration_date + 3)::DATE) ) + 6 AS week_end_date,
-        COUNT(runner_id) AS runners_signed_up
-    FROM runners
-    GROUP BY week_start_date, week_end_date
-    ORDER BY week_start_date;
+    (DATE_TRUNC('week', registration_date + 3)::DATE) - 3 AS week_start_date,
+    ((DATE_TRUNC('week', registration_date + 3)::DATE) - 3) + 6 AS week_end_date,
+    COUNT(runner_id) AS runners_signed_up
+FROM runners
+GROUP BY week_start_date, week_end_date
+ORDER BY week_start_date;
+
 
 | week_start_date | week_end_date | runners_signed_up |
 | --------------- | ------------- | ----------------- |
