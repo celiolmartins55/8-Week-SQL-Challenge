@@ -25,3 +25,6 @@
 👓 **Database Overview**: The schema comprises six tables: runners, runner_orders, customer_orders, pizza_names, pizza_recipes and pizza_toppings. The relationships between these entities are structured as follows:
 
 <img width="1788" height="691" alt="image" src="https://github.com/user-attachments/assets/3445ddae-e15e-4730-91b8-3c99e32f837c" />
+
+---
+🔗 Challenge accessible at: https://8weeksqlchallenge.com/case-study-2/
