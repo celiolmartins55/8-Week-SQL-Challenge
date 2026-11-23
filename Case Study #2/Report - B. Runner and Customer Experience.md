@@ -16,9 +16,9 @@
 
 | week_start_date | week_end_date | runners_signed_up |
 | --------------- | ------------- | ----------------- |
-| 2021-01-04      | 2021-01-10    | 2                 |
-| 2021-01-11      | 2021-01-17    | 1                 |
-| 2021-01-18      | 2021-01-24    | 1                 |
+| 2021-01-01      | 2021-01-07    | 2                 |
+| 2021-01-08      | 2021-01-14    | 1                 |
+| 2021-01-15      | 2021-01-21    | 1                 |
 
 ---
 **2.What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?**
