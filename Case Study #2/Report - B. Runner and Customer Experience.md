@@ -1,3 +1,8 @@
+# Case Study #2- B.Runner and Customer Experience
+
+### Following the `Data Cleaning` phase, the case study advances to the first analytical area: Runner and Customer Experience.
+
+---
 
 **1.How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)**
 
@@ -16,9 +21,8 @@
 | 2021-01-18      | 2021-01-24    | 1                 |
 
 ---
-**Query #5**
+**2.What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?**
 
-    -- 2.What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
     WITH cte_two AS (
       SELECT 
       	DISTINCT r.order_id,
@@ -45,9 +49,8 @@
 | 3         | 10.467          |
 
 ---
-**Query #6**
+**3.Is there any relationship between the number of pizzas and how long the order takes to prepare?**
 
-    -- 3.Is there any relationship between the number of pizzas and how long the order takes to prepare?
     WITH cte_three AS (
       SELECT 
       	DISTINCT r.order_id,
@@ -78,9 +81,8 @@
 | 3             | 29.283     |
 
 ---
-**Query #7**
+**4.What was the average distance travelled for each customer?**
 
-    -- 4.What was the average distance travelled for each customer?
     SELECT
       	c.customer_id,
         ROUND(AVG(r.distance),3)
@@ -97,9 +99,8 @@
 | 105         | 25.000 |
 
 ---
-**Query #8**
+**5.What was the difference between the longest and shortest delivery times for all orders?**
 
-    -- 5.What was the difference between the longest and shortest delivery times for all orders?
     SELECT
     	MAX(DURATION)-MIN(DURATION) AS difference_max_min
      FROM runner_orders;
@@ -109,9 +110,8 @@
 | 30                 |
 
 ---
-**Query #9**
+**6.What was the average speed for each runner for each delivery and do you notice any trend for these values?**
 
-    -- 6.What was the average speed for each runner for each delivery and do you notice any trend for these values?
     SELECT
     	runner_id,
     	order_id,
@@ -131,9 +131,6 @@
 | 2         | 4        | 35.10     |
 | 3         | 5        | 40.00     |
 
----
-**Query #10**
-
     SELECT
     	runner_id,
         ROUND(AVG((distance/ (duration::numeric/60))),2) AS avg_speed
@@ -148,9 +145,6 @@
 | 2         | 62.90     |
 | 3         | 40.00     |
 
----
-**Query #11**
-
     SELECT
         ROUND(AVG((distance/ (duration::numeric/60))),3)  AS avg_speed
     FROM runner_orders
@@ -161,9 +155,8 @@
 | 51.356    |
 
 ---
-**Query #12**
+**7.What is the successful delivery percentage for each runner?**
 
-    -- 7.What is the successful delivery percentage for each runner?
     WITH cte_seven AS (
       SELECT
     	runner_id,
@@ -187,4 +180,3 @@
 
 ---
 
-[View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
