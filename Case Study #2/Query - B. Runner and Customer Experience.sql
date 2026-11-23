@@ -41,6 +41,14 @@ ALTER COLUMN pickup_time TYPE TIMESTAMP USING NULLIF(pickup_time, '')::TIMESTAMP
 ALTER COLUMN distance TYPE NUMERIC USING NULLIF(distance, '')::NUMERIC,
 ALTER COLUMN duration TYPE INTEGER USING NULLIF(duration, '')::INTEGER;
 
+-- 1.How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)
+SELECT 
+    (DATE_TRUNC('week', registration_date + 3)::DATE) - 3 AS week_start_date,
+    ((DATE_TRUNC('week', registration_date + 3)::DATE) - 3) + 6 AS week_end_date,
+    COUNT(runner_id) AS runners_signed_up
+FROM runners
+GROUP BY week_start_date, week_end_date
+ORDER BY week_start_date;
 
 -- 2.What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
 WITH cte_two AS (
@@ -88,10 +96,12 @@ SELECT
 FROM customer_orders c LEFT JOIN  runner_orders r ON c.order_id=r.order_id
 GROUP BY c.customer_id
 ORDER BY c.customer_id;
+
 -- 5.What was the difference between the longest and shortest delivery times for all orders?
 SELECT
 	MAX(DURATION)-MIN(DURATION) AS difference_max_min
  FROM runner_orders;
+ 
 -- 6.What was the average speed for each runner for each delivery and do you notice any trend for these values?
 SELECT
 	runner_id,
@@ -113,6 +123,7 @@ SELECT
     ROUND(AVG((distance/ (duration::numeric/60))),3)  AS avg_speed
 FROM runner_orders
 WHERE distance IS NOT NULL;
+
 -- 7.What is the successful delivery percentage for each runner?
 WITH cte_seven AS (
   SELECT
