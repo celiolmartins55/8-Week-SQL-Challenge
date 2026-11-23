@@ -7,7 +7,7 @@
 ---
 💭 **Summary**: Danny aims to establish a new pizza empire, leveraging data analytics to drive substantial business growth. To achieve this, he has formulated a comprehensive set of analytical questions, categorising them into distinct focus areas:
 - [Pizza Metrics](https://github.com/celiolmartins55/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232/Report%20-%20A.%20Pizza%20Metrics.md)
-- Runner and Customer Experience
+- [Runner and Customer Experience](https://github.com/celiolmartins55/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232/Report%20-%20B.%20Runner%20and%20Customer%20Experience.md)
 - Ingredient Optimisation
 - Pricing and Ratings
 - Bonus DML Challenges (DML = Data Manipulation Language)
