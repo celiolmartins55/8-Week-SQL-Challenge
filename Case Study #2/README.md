@@ -17,7 +17,7 @@
 - 🧹`Data Cleaning.sql`: A file detailing the pre-processing steps required prior to query execution.
 - 📃`Report.md`: A document containing the questions along with the SQL queries, the resulting output tables and insights.
 - 🛠`Query.sql`: The raw SQL script, ready for copy and execution in any SQL environment (incorporating all necessary data cleaning).
-- ⚙`Schema.sql`: The database schema configuration, required to create and populate the tables prior to querying.
+- ⚙[`Schema.sql`](https://github.com/celiolmartins55/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232/Schema.sql): The database schema configuration, required to create and populate the tables prior to querying.
 
 **Obs:  Each area have a own Report.md and Query.sql*
 
