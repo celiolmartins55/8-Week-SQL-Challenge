@@ -4,7 +4,7 @@
 
 ---
 
-**1.How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)**
+**1. How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)**
 
     SELECT 
     (DATE_TRUNC('week', registration_date + 3)::DATE) - 3 AS week_start_date,
@@ -22,7 +22,7 @@ ORDER BY week_start_date;
 | 2021-01-15      | 2021-01-21    | 1                 |
 
 ---
-**2.What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?**
+**2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?**
 
     WITH cte_two AS (
       SELECT 
@@ -50,7 +50,7 @@ ORDER BY week_start_date;
 | 3         | 10.467          |
 
 ---
-**3.Is there any relationship between the number of pizzas and how long the order takes to prepare?**
+**3. Is there any relationship between the number of pizzas and how long the order takes to prepare?**
 
     WITH cte_three AS (
       SELECT 
@@ -82,7 +82,7 @@ ORDER BY week_start_date;
 | 3             | 29.283     |
 
 ---
-**4.What was the average distance travelled for each customer?**
+**4. What was the average distance travelled for each customer?**
 
     SELECT
       	c.customer_id,
@@ -111,7 +111,7 @@ ORDER BY week_start_date;
 | 30                 |
 
 ---
-**6.What was the average speed for each runner for each delivery and do you notice any trend for these values?**
+**6. What was the average speed for each runner for each delivery and do you notice any trend for these values?**
 
     SELECT
     	runner_id,
@@ -156,7 +156,7 @@ ORDER BY week_start_date;
 | 51.356    |
 
 ---
-**7.What is the successful delivery percentage for each runner?**
+**7. What is the successful delivery percentage for each runner?**
 
     WITH cte_seven AS (
       SELECT
