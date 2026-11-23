@@ -20,3 +20,5 @@
 <img align="center" width="800" height="390" alt="image" src="https://github.com/user-attachments/assets/d31c879b-65f0-4054-a2fb-64763658920c" />
 
 ---
+
+🔗 Challenge accessible at: https://8weeksqlchallenge.com/case-study-1/
