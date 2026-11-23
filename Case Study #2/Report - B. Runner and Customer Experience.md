@@ -1,6 +1,6 @@
 # Case Study #2- B.Runner and Customer Experience
 
-### Following the `Data Cleaning` phase, the case study advances to the first analytical area: Runner and Customer Experience.
+### Following the `Data Cleaning` phase, the case study advances to the second analytical area: Runner and Customer Experience.
 
 ---
 
