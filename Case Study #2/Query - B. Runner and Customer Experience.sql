@@ -43,7 +43,7 @@ ALTER COLUMN duration TYPE INTEGER USING NULLIF(duration, '')::INTEGER;
 
 
 -- 2.What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
-WITH table_two AS (
+WITH cte_two AS (
   SELECT 
   	DISTINCT r.order_id,
   	c.order_time,
@@ -58,12 +58,12 @@ WITH table_two AS (
 SELECT
 	runner_id,
     ROUND(AVG(EXTRACT(EPOCH FROM (pickup_time-order_time))/60)::NUMERIC,3) AS average_minutes
-FROM table_two
+FROM cte_two
 GROUP BY runner_id
 ORDER BY runner_id;
 
 -- 3.Is there any relationship between the number of pizzas and how long the order takes to prepare?
-WITH table_three AS (
+WITH cte_three AS (
   SELECT 
   	DISTINCT r.order_id,
   	COUNT(c.customer_id) AS pizza_numbers,
@@ -78,7 +78,7 @@ WITH table_three AS (
 SELECT
 	pizza_numbers,
     ROUND(EXTRACT(EPOCH FROM (pickup_time-order_time)/60)::NUMERIC,3) AS long_order
-FROM table_three
+FROM cte_three
 ORDER BY pizza_numbers;
 
 -- 4.What was the average distance travelled for each customer?
@@ -114,7 +114,7 @@ SELECT
 FROM runner_orders
 WHERE distance IS NOT NULL;
 -- 7.What is the successful delivery percentage for each runner?
-WITH table_seven AS (
+WITH cte_seven AS (
   SELECT
 	runner_id,
     COUNT(order_id) AS order_suc
@@ -125,6 +125,6 @@ WITH table_seven AS (
 SELECT
 	r.runner_id,
 	ROUND(100.0*t.order_suc/COUNT(r.order_id),2) || '%' AS successful_delivery_percentage
-FROM runner_orders r LEFT JOIN table_seven t ON r.runner_id = t.runner_id
+FROM runner_orders r LEFT JOIN cte_seven t ON r.runner_id = t.runner_id
 GROUP BY r.runner_id, t.order_suc
 ORDER BY r.runner_id;
