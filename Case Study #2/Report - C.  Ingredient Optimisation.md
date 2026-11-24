@@ -23,6 +23,7 @@
 
 ---
 **2. What was the most commonly added extra?**
+
     WITH table_two AS(
     	SELECT
         	TRIM(UNNEST(STRING_TO_ARRAY(extras, ',')))::INTEGER AS extras_id
@@ -57,14 +58,13 @@
 | Cheese                | 4                |
 
 ---
-### **4.Generate an order item for each record in the customers_orders table in the format of one of the following:** 
-    
-    - *Meat Lovers*
-    *-- Meat Lovers - Exclude Beef*
-    *-- Meat Lovers - Extra Bacon*
-    *-- Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers*
-    
-    ``` 
+**4.Generate an order item for each record in the customers_orders table in the format of one of the following:** 
+- *Meat Lovers*
+- *Meat Lovers - Exclude Beef*
+- Meat Lovers - Extra Bacon*
+- *Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers*
+
+``` 
     WITH numbered_orders AS (
         SELECT 
             order_id,
@@ -122,6 +122,7 @@
     LEFT JOIN extras_names xt 
         ON n.record_id = xt.record_id
     ORDER BY n.order_id, n.record_id;
+```
 
 | order_id | customer_id | order_item                                                      |
 | -------- | ----------- | --------------------------------------------------------------- |
@@ -140,13 +141,12 @@
 | 10       | 104         | Meatlovers                                                      |
 | 10       | 104         | Meatlovers - Exclude BBQ Sauce, Mushrooms - Extra Bacon, Cheese |
 
-```
 
 ---
 
-**5.Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients**
-    *-- For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"*
-    
+**5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients.**
+*For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"*
+
     WITH numbered_orders AS (
         SELECT 
             order_id,
@@ -230,6 +230,7 @@
     GROUP BY ic.record_id, ic.order_id, pn.pizza_name
     ORDER BY ic.order_id, ic.record_id;
 
+
 | order_id | ingredient_list                                                                     |
 | -------- | ----------------------------------------------------------------------------------- |
 | 1        | Meatlovers: BBQ Sauce, Bacon, Beef, Cheese, Chicken, Mushrooms, Pepperoni, Salami   |
@@ -248,9 +249,8 @@
 | 10       | Meatlovers: 2xBacon, Beef, 2xCheese, Chicken, Pepperoni, Salami                     |
 
 ---
-**Query #9**
+**6.What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?**
 
-    -- 6.What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
     WITH numbered_orders AS (
         SELECT 
             order_id,
@@ -320,7 +320,7 @@
         SUM(ic.count_ingred) AS quantity
     FROM ingredient_counts ic
     GROUP BY ingredient
-    ORDER BY quantity DESC
+    ORDER BY quantity DESC;
 
 | ingredient   | quantity |
 | ------------ | -------- |
@@ -337,6 +337,4 @@
 | Tomatoes     | 4        |
 | Peppers      | 4        |
 
----
 
-[View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
