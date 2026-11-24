@@ -141,4 +141,86 @@ LEFT JOIN extras_names xt
 ORDER BY n.order_id, n.record_id;
 -- 5.Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
 -- For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
+WITH numbered_orders AS (
+    SELECT 
+        order_id,
+        pizza_id,
+        exclusions,
+        extras,
+        ROW_NUMBER() OVER (ORDER BY order_id) AS record_id
+    FROM customer_orders
+),
+standard_recipe AS (
+    SELECT 
+        pizza_id,
+        TRIM(UNNEST(STRING_TO_ARRAY(toppings, ',')))::INTEGER AS topping_id
+    FROM pizza_recipes
+),
+base_pizza_ingredients AS (
+    SELECT 
+        n.record_id,
+        n.order_id,
+        n.pizza_id,
+        sr.topping_id
+    FROM numbered_orders n
+    JOIN standard_recipe sr 
+        ON n.pizza_id = sr.pizza_id
+),
+exclusions_cte AS (
+    SELECT 
+        record_id,
+        TRIM(UNNEST(STRING_TO_ARRAY(exclusions, ',')))::INTEGER AS topping_id
+    FROM numbered_orders
+    WHERE exclusions IS NOT NULL AND exclusions != ''
+),
+extras_cte AS (
+    SELECT 
+        record_id,
+        order_id,
+        pizza_id,
+        TRIM(UNNEST(STRING_TO_ARRAY(extras, ',')))::INTEGER AS topping_id
+    FROM numbered_orders
+    WHERE extras IS NOT NULL AND extras != ''
+),
+pizza_assembly AS (
+    SELECT b.record_id, b.order_id, b.pizza_id, b.topping_id
+    FROM base_pizza_ingredients b
+    LEFT JOIN exclusions_cte exc 
+        ON b.record_id = exc.record_id AND b.topping_id = exc.topping_id
+    WHERE exc.topping_id IS NULL 
+    UNION ALL
+    SELECT record_id, order_id, pizza_id, topping_id 
+    FROM extras_cte
+),
+ingredient_counts AS (
+    SELECT 
+        pa.record_id,
+        pa.order_id,
+        pa.pizza_id,
+        pt.topping_name,
+        COUNT(pa.topping_id) AS qtd_ingrediente
+    FROM pizza_assembly pa
+    JOIN pizza_toppings pt 
+        ON pa.topping_id = pt.topping_id
+    GROUP BY pa.record_id, pa.order_id, pa.pizza_id, pt.topping_name
+)
+
+SELECT 
+    ic.order_id,
+    CONCAT(
+        pn.pizza_name, 
+        ': ', 
+        STRING_AGG(
+            CASE 
+                WHEN ic.qtd_ingrediente > 1 THEN ic.qtd_ingrediente || 'x' || ic.topping_name 
+                ELSE ic.topping_name 
+            END, 
+            ', ' ORDER BY ic.topping_name ASC -- Garante a ordem alfabética!
+        )
+    ) AS ingredient_list
+FROM ingredient_counts ic
+JOIN pizza_names pn 
+    ON ic.pizza_id = pn.pizza_id
+GROUP BY ic.record_id, ic.order_id, pn.pizza_name
+ORDER BY ic.order_id, ic.record_id;
 -- 6.What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
