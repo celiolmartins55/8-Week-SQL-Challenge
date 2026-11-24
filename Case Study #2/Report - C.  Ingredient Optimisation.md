@@ -1,7 +1,6 @@
 
-**Query #4**
+**1. What are the standard ingredients for each pizza?**
 
-    -- 1.What are the standard ingredients for each pizza?
     WITH table_one AS (
         SELECT 
             pizza_id,
@@ -23,9 +22,7 @@
 | Vegetarian | Tomato Sauce, Cheese, Mushrooms, Onions, Peppers, Tomatoes            |
 
 ---
-**Query #5**
-
-    -- 2.What was the most commonly added extra?
+**2. What was the most commonly added extra?**
     WITH table_two AS(
     	SELECT
         	TRIM(UNNEST(STRING_TO_ARRAY(extras, ',')))::INTEGER AS extras_id
@@ -42,9 +39,8 @@
 | Bacon               | 4           |
 
 ---
-**Query #6**
-
-    -- 3.What was the most common exclusion?
+**3. What was the most common exclusion?**
+    
     WITH table_three AS(
     	SELECT
         	TRIM(UNNEST(STRING_TO_ARRAY(exclusions, ',')))::INTEGER AS exclusions_id
@@ -61,13 +57,13 @@
 | Cheese                | 4                |
 
 ---
-**Query #7**
-
-    -- 4.Generate an order item for each record in the customers_orders table in the format of one of the following:
-    -- Meat Lovers
-    -- Meat Lovers - Exclude Beef
-    -- Meat Lovers - Extra Bacon
-    -- Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
+### **4.Generate an order item for each record in the customers_orders table in the format of one of the following:** 
+    
+    - *Meat Lovers*
+    *-- Meat Lovers - Exclude Beef*
+    *-- Meat Lovers - Extra Bacon*
+    *-- Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers*
+    
     WITH numbered_orders AS (
         SELECT 
             order_id,
@@ -144,10 +140,9 @@
 | 10       | 104         | Meatlovers - Exclude BBQ Sauce, Mushrooms - Extra Bacon, Cheese |
 
 ---
-**Query #8**
-
-    -- 5.Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
-    -- For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
+**5.Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients**
+    *-- For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"*
+    
     WITH numbered_orders AS (
         SELECT 
             order_id,
