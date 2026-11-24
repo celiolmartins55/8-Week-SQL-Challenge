@@ -55,6 +55,7 @@ LEFT JOIN pizza_toppings pt ON t1.topping_id = pt.topping_id
 LEFT JOIN pizza_names pn ON t1.pizza_id = pn.pizza_id
 GROUP BY pizza_name
 ORDER BY pizza_name;
+
 -- 2.What was the most commonly added extra?
 WITH table_two AS(
 	SELECT
@@ -66,6 +67,7 @@ SELECT
 FROM table_two t2 LEFT JOIN pizza_toppings pt ON extras_id = topping_id
 GROUP BY pt.topping_name
 ORDER BY count_extra DESC LIMIT 1;
+
 -- 3.What was the most common exclusion?
 WITH table_three AS(
 	SELECT
@@ -225,3 +227,73 @@ GROUP BY ic.record_id, ic.order_id, pn.pizza_name
 ORDER BY ic.order_id, ic.record_id;
 
 -- 6.What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
+WITH numbered_orders AS (
+    SELECT 
+        order_id,
+        pizza_id,
+        exclusions,
+        extras,
+        ROW_NUMBER() OVER (ORDER BY order_id) AS record_id
+    FROM customer_orders
+),
+standard_recipe AS (
+    SELECT 
+        pizza_id,
+        TRIM(UNNEST(STRING_TO_ARRAY(toppings, ',')))::INTEGER AS topping_id
+    FROM pizza_recipes
+),
+base_pizza_ingredients AS (
+    SELECT 
+        n.record_id,
+        n.order_id,
+        n.pizza_id,
+        sr.topping_id
+    FROM numbered_orders n
+    JOIN standard_recipe sr 
+        ON n.pizza_id = sr.pizza_id
+),
+exclusions_cte AS (
+    SELECT 
+        record_id,
+        TRIM(UNNEST(STRING_TO_ARRAY(exclusions, ',')))::INTEGER AS topping_id
+    FROM numbered_orders
+    WHERE exclusions IS NOT NULL AND exclusions != ''
+),
+extras_cte AS (
+    SELECT 
+        record_id,
+        order_id,
+        pizza_id,
+        TRIM(UNNEST(STRING_TO_ARRAY(extras, ',')))::INTEGER AS topping_id
+    FROM numbered_orders
+    WHERE extras IS NOT NULL AND extras != ''
+),
+pizza_assembly AS (
+    SELECT b.record_id, b.order_id, b.pizza_id, b.topping_id
+    FROM base_pizza_ingredients b
+    LEFT JOIN exclusions_cte exc 
+        ON b.record_id = exc.record_id AND b.topping_id = exc.topping_id
+    WHERE exc.topping_id IS NULL 
+    UNION ALL
+    SELECT record_id, order_id, pizza_id, topping_id 
+    FROM extras_cte
+),
+ingredient_counts AS (
+    SELECT 
+        pa.record_id,
+        pa.order_id,
+        pa.pizza_id,
+        pt.topping_name,
+        COUNT(pa.topping_id) AS count_ingred
+    FROM pizza_assembly pa
+    JOIN pizza_toppings pt 
+        ON pa.topping_id = pt.topping_id
+    GROUP BY pa.record_id, pa.order_id, pa.pizza_id, pt.topping_name
+)
+
+SELECT
+    ic.topping_name AS ingredient,
+    SUM(ic.count_ingred) AS quantity
+FROM ingredient_counts ic
+GROUP BY ingredient
+ORDER BY quantity DESC
