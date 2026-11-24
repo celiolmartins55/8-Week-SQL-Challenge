@@ -198,7 +198,7 @@ ingredient_counts AS (
         pa.order_id,
         pa.pizza_id,
         pt.topping_name,
-        COUNT(pa.topping_id) AS qtd_ingrediente
+        COUNT(pa.topping_id) AS count_ingred
     FROM pizza_assembly pa
     JOIN pizza_toppings pt 
         ON pa.topping_id = pt.topping_id
@@ -212,10 +212,10 @@ SELECT
         ': ', 
         STRING_AGG(
             CASE 
-                WHEN ic.qtd_ingrediente > 1 THEN ic.qtd_ingrediente || 'x' || ic.topping_name 
+                WHEN ic.count_ingred> 1 THEN ic.count_ingred || 'x' || ic.topping_name 
                 ELSE ic.topping_name 
             END, 
-            ', ' ORDER BY ic.topping_name ASC -- Garante a ordem alfabética!
+            ', ' ORDER BY ic.topping_name ASC 
         )
     ) AS ingredient_list
 FROM ingredient_counts ic
@@ -223,4 +223,5 @@ JOIN pizza_names pn
     ON ic.pizza_id = pn.pizza_id
 GROUP BY ic.record_id, ic.order_id, pn.pizza_name
 ORDER BY ic.order_id, ic.record_id;
+
 -- 6.What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
