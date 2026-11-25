@@ -1,4 +1,4 @@
-# 🥓Case Study #2- C. Ingredient Optimisation
+# 🥓Case Study #2 - C. Ingredient Optimisation
 
 ### Following the `Data Cleaning` phase, the case study advances to the third analytical area: Ingredient Optimisation.
 
