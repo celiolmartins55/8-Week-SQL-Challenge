@@ -10,9 +10,9 @@
     (DATE_TRUNC('week', registration_date + 3)::DATE) - 3 AS week_start_date,
     ((DATE_TRUNC('week', registration_date + 3)::DATE) - 3) + 6 AS week_end_date,
     COUNT(runner_id) AS runners_signed_up
-FROM runners
-GROUP BY week_start_date, week_end_date
-ORDER BY week_start_date;
+    FROM runners
+    GROUP BY week_start_date, week_end_date
+    ORDER BY week_start_date;
 
 
 | week_start_date | week_end_date | runners_signed_up |
@@ -20,6 +20,8 @@ ORDER BY week_start_date;
 | 2021-01-01      | 2021-01-07    | 2                 |
 | 2021-01-08      | 2021-01-14    | 1                 |
 | 2021-01-15      | 2021-01-21    | 1                 |
+
+The first week was the period with the highest number of registrations.
 
 ---
 **2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?**
@@ -48,6 +50,8 @@ ORDER BY week_start_date;
 | 1         | 14.329          |
 | 2         | 20.011          |
 | 3         | 10.467          |
+
+Runner 2 recorded a substantially longer time compared to the other runners.
 
 ---
 **3. Is there any relationship between the number of pizzas and how long the order takes to prepare?**
@@ -80,6 +84,8 @@ ORDER BY week_start_date;
 | 2             | 21.233     |
 | 2             | 15.517     |
 | 3             | 29.283     |
+
+Analysing the results table, the time appears to increase by 10 minutes for each additional pizza.
 
 ---
 **4. What was the average distance travelled for each customer?**
