@@ -347,4 +347,4 @@ The frequent exclusion of cheese can likely be attributed to dietary restriction
 | Tomatoes     | 4        |
 | Peppers      | 4        |
 
-
+As anticipated, since it is a standard ingredient and the most requested extra, bacon was the most frequently used item. Although it was the most common exclusion, cheese still ranked as the fourth highest ingredient by volume.
