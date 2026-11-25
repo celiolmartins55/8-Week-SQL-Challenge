@@ -68,7 +68,7 @@ Although 'Meatlovers' already contains bacon in its default recipe, it was the m
 The frequent exclusion of cheese can likely be attributed to dietary restrictions, such as lactose intolerance.
 
 ---
-**4.Generate an order item for each record in the customers_orders table in the format of one of the following:** 
+**4. Generate an order item for each record in the customers_orders table in the format of one of the following:** 
 - *Meat Lovers*
 - *Meat Lovers - Exclude Beef*
 - Meat Lovers - Extra Bacon*
