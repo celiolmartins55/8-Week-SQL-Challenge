@@ -1,4 +1,4 @@
-# 🥓Case Study #2- C. Ingredient Optimisation.md
+# 🥓Case Study #2- C. Ingredient Optimisation
 
 ### Following the `Data Cleaning` phase, the case study advances to the third analytical area: Ingredient Optimisation.
 
@@ -25,6 +25,8 @@
 | Meatlovers | BBQ Sauce, Pepperoni, Cheese, Salami, Chicken, Bacon, Mushrooms, Beef |
 | Vegetarian | Tomato Sauce, Cheese, Mushrooms, Onions, Peppers, Tomatoes            |
 
+The default ingredient profiles for each pizza are entirely distinct.
+
 ---
 **2. What was the most commonly added extra?**
 
@@ -43,6 +45,8 @@
 | ------------------- | ----------- |
 | Bacon               | 4           |
 
+Although 'Meatlovers' already contains bacon in its default recipe, it was the most requested extra ingredient.
+
 ---
 **3. What was the most common exclusion?**
     
@@ -60,6 +64,8 @@
 | most_common_exclusion | count_exclusions |
 | --------------------- | ---------------- |
 | Cheese                | 4                |
+
+The frequent exclusion of cheese can likely be attributed to dietary restrictions, such as lactose intolerance.
 
 ---
 **4.Generate an order item for each record in the customers_orders table in the format of one of the following:** 
