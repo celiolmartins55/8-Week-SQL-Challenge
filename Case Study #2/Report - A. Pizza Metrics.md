@@ -1,4 +1,4 @@
-# 📝Case Study #2- A. Pizza Metrics
+# 📝Case Study #2 - A. Pizza Metrics
 
 ### Following the `Data Cleaning` phase, the case study advances to the first analytical area: Pizza Metrics.
 ---
