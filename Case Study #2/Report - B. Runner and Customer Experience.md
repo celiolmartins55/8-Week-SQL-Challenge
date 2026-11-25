@@ -105,8 +105,10 @@ Analysing the results table, the time appears to increase by 10 minutes for each
 | 104         | 10.000 |
 | 105         | 25.000 |
 
+Customers are located at varying distances from the Pizza Runner HQ.
+
 ---
-**5.What was the difference between the longest and shortest delivery times for all orders?**
+**5. What was the difference between the longest and shortest delivery times for all orders?**
 
     SELECT
     	MAX(DURATION)-MIN(DURATION) AS difference_max_min
@@ -184,6 +186,4 @@ Analysing the results table, the time appears to increase by 10 minutes for each
 | 1         | 100.00%                        |
 | 2         | 75.00%                         |
 | 3         | 50.00%                         |
-
----
 
