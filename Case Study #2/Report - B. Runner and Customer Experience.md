@@ -118,6 +118,8 @@ Customers are located at varying distances from the Pizza Runner HQ.
 | ------------------ |
 | 30                 |
 
+The difference is substantial and is caused by the varying distances, as seen in the previous question.
+
 ---
 **6. What was the average speed for each runner for each delivery and do you notice any trend for these values?**
 
@@ -163,6 +165,8 @@ Customers are located at varying distances from the Pizza Runner HQ.
 | --------- |
 | 51.356    |
 
+Runner 2 has the peak average speed across all orders and the highest average among the other runners. This is maybe a way to compensate for the time to arrive at the Pizza Runner HQ.
+
 ---
 **7. What is the successful delivery percentage for each runner?**
 
@@ -187,3 +191,4 @@ Customers are located at varying distances from the Pizza Runner HQ.
 | 2         | 75.00%                         |
 | 3         | 50.00%                         |
 
+Only Runner 1 has a perfect successful delivery percentage.
