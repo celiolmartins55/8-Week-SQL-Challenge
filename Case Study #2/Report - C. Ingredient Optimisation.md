@@ -259,7 +259,7 @@ The frequent exclusion of cheese can likely be attributed to dietary restriction
 | 10       | Meatlovers: 2xBacon, Beef, 2xCheese, Chicken, Pepperoni, Salami                     |
 
 ---
-**6.What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?**
+**6. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?**
 
     WITH numbered_orders AS (
         SELECT 
