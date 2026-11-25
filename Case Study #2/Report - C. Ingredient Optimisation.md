@@ -1,4 +1,8 @@
+# 🥓Case Study #2- C. Ingredient Optimisation.md
 
+### Following the `Data Cleaning` phase, the case study advances to the third analytical area: Ingredient Optimisation.
+
+---
 **1. What are the standard ingredients for each pizza?**
 
     WITH table_one AS (
