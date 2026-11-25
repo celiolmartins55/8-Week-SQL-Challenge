@@ -374,7 +374,7 @@ By incorporating the first-week membership bonus and restricting the dataset to 
 | C           | 2021-01-01 | ramen        | 12    | N      |         |
 | C           | 2021-01-07 | ramen        | 12    | N      |         |
 
----
+
 
 
 
